@@ -1,17 +1,23 @@
 package ru.ruslan.spring.dz4.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ru.ruslan.spring.dz4.dto.RegisterDto;
 import ru.ruslan.spring.dz4.model.MyUser;
+import ru.ruslan.spring.dz4.service.AuthService;
 
-@Controller
+@RestController
 @RequestMapping("/api")
 public class HelloController {
 
+    private final AuthService authService;
+
+    @Autowired
+    public HelloController(AuthService authService) {
+        this.authService = authService;
+    }
 
     @GetMapping("/register")
     public String register() {
@@ -20,6 +26,7 @@ public class HelloController {
 
     @PostMapping("/register")
     public String register(@RequestBody RegisterDto user) {
-
+        System.out.println(user);
+        return authService.register(user);
     }
 }

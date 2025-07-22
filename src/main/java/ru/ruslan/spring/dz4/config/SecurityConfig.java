@@ -64,7 +64,7 @@ public class SecurityConfig {
                 // Настройка авторизации endpoints
                 .authorizeHttpRequests(authz -> authz
                         // Публичные endpoints
-                        .requestMatchers("/api/register/**", "/api/login/**").permitAll()
+                        /*.requestMatchers("/api/register/**", "/api/login/**").permitAll()
                         .requestMatchers("/api/auth/refresh").permitAll()
                         .requestMatchers("/actuator/health").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
@@ -72,9 +72,9 @@ public class SecurityConfig {
                         // Endpoints для разных ролей
                         .requestMatchers("/api/admin/**").hasRole("ADMIN")
                         .requestMatchers("/api/user/**").hasAnyRole("ADMIN", "USER", "GUEST")
-
+*/
                         // Все остальные требуют аутентификации
-                        .anyRequest().authenticated()
+                        .anyRequest().permitAll()
                 );
 
               /*  // Обработка исключений аутентификации
